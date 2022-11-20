@@ -1,5 +1,7 @@
 # README
 
+Following app is hosted in heroku. In case hosting gets expired, clone into local machine and run the application.
+
 1. Create a board with following request:
     POST https://snake-ladder-game-01.herokuapp.com/
     
