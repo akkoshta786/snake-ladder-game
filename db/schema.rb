@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_075634) do
     t.integer "board_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index "\"board\", \"source\", \"destination\"", name: "index_paths_on_board_and_source_and_destination", unique: true
+    t.index ["board_id", "source", "destination"], name: "index_paths_on_board_id_and_source_and_destination", unique: true
     t.index ["board_id"], name: "index_paths_on_board_id"
     t.index ["source"], name: "index_paths_on_source", unique: true
   end
