@@ -6,7 +6,7 @@ class CreatePaths < ActiveRecord::Migration[7.0]
       t.references :board
 
       t.index :source, unique: true
-      t.index %i[board source destination], unique: true
+      t.index %i[board_id source destination], unique: true
       t.timestamps
     end
   end
