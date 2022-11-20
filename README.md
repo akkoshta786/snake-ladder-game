@@ -2,6 +2,8 @@
 
 Following app is hosted in heroku. In case hosting gets expired, clone into local machine and run the application.
 
+Board configured: https://content.instructables.com/FD5/JSGL/JXL594QA/FD5JSGLJXL594QA.jpg?auto=webp (can be changed from backend)
+
 1. Create a board with following request:
     POST https://snake-ladder-game-01.herokuapp.com/board
     
