@@ -55,3 +55,5 @@ group :development, :test do
   gem 'database_cleaner'
 end
 
+
+gem "pg", "~> 1.4"
