@@ -16,4 +16,4 @@ Following app is hosted in heroku. In case hosting gets expired, clone into loca
     
 3. To restart game, call following API
 
-  POST POST https://snake-ladder-game-01.herokuapp.com/board/:board_id/init, body: "START"
+    POST https://snake-ladder-game-01.herokuapp.com/board/:board_id/init, body: "START"
