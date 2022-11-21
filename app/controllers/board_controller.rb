@@ -3,6 +3,7 @@ class BoardController < ApplicationController
 
   def create
     board = Board.create!
+    board.init
 
     render json: { response: "board created successfully with id: #{board.id}" }
   end

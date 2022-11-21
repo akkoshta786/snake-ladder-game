@@ -11,9 +11,13 @@
 #  updated_at        :datetime         not null
 #
 class Board < ApplicationRecord
+  # Validations
+  validates :number_of_players, presence: true
+  validates :winner, presence: true, unless: -> { active }
+
   # Associations
-  has_many :players, inverse_of: :board
-  has_many :paths, inverse_of: :board
+  has_many :players, inverse_of: :board, dependent: :destroy
+  has_many :paths, inverse_of: :board, dependent: :destroy
 
   def player_move(dice_throw_count)
     return 1 unless active
@@ -21,28 +25,34 @@ class Board < ApplicationRecord
     return 2 if dice_throw_count <= 0 || dice_throw_count > 6
 
     current_player = Player.find(player_turn)
-    position = [100, current_player.position + dice_throw_count].min
-    jumper = paths.find_by(source: position)
 
-    while jumper.present?
-      position = jumper.destination
+    position = if current_player.position + dice_throw_count <= 100
+                 current_player.position + dice_throw_count
+               else
+                 current_player.position
+               end
+
+    if position != current_player.position
       jumper = paths.find_by(source: position)
+      while jumper.present?
+        position = jumper.destination
+        jumper = paths.find_by(source: position)
+      end
+
+      current_player.update!(position:)
     end
 
-    current_player.update!(position:)
     update!(player_turn: current_player.next)
 
     return { response: "position of #{current_player.name} is #{position}" } unless position == 100
 
-    update!(active: false)
-    update!(winner: current_player.name)
+    update!(active: false, winner: current_player.name)
 
     { response: "#{current_player.name} wins" }
   end
 
   def init
-    update!(active: true)
-    update!(winner: nil)
+    update!(active: true, winner: nil)
     initialize_players
     initialize_paths
   end
