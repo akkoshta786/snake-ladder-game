@@ -10,32 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_221_120_075_634) do
-  create_table 'boards', force: :cascade do |t|
-    t.integer 'number_of_players', default: 2, null: false
-    t.integer 'player_turn'
-    t.boolean 'active', default: true, null: false
-    t.string 'winner'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+ActiveRecord::Schema[7.0].define(version: 2022_11_20_075634) do
+  create_table "boards", force: :cascade do |t|
+    t.integer "number_of_players", default: 2, null: false
+    t.integer "player_turn"
+    t.boolean "active", default: true, null: false
+    t.string "winner"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'paths', force: :cascade do |t|
-    t.integer 'source', null: false
-    t.integer 'destination', null: false
-    t.integer 'board_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index %w[board_id source], name: 'index_paths_on_board_id_and_source', unique: true
-    t.index ['board_id'], name: 'index_paths_on_board_id'
+  create_table "paths", force: :cascade do |t|
+    t.integer "source", null: false
+    t.integer "destination", null: false
+    t.integer "board_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_id", "source"], name: "index_paths_on_board_id_and_source", unique: true
+    t.index ["board_id"], name: "index_paths_on_board_id"
   end
 
-  create_table 'players', force: :cascade do |t|
-    t.string 'name', null: false
-    t.integer 'position', null: false
-    t.integer 'board_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['board_id'], name: 'index_players_on_board_id'
+  create_table "players", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "position", null: false
+    t.integer "board_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_id"], name: "index_players_on_board_id"
   end
+
 end
